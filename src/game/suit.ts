@@ -15,15 +15,27 @@ export class Suit {
     if (!symbol) {
       throw new TypeError('Suit symbol is required');
     }
-    this.pluralName = toStringNonNull(pluralName) || `${singularName}s`;
-    this.singularName = singularName;
-    this.symbol = symbol;
+    this.#pluralName = toStringNonNull(pluralName) || `${singularName}s`;
+    this.#singularName = singularName;
+    this.#symbol = symbol;
     freeze(this);
   }
 
-  readonly pluralName: string;
-  readonly singularName: string;
-  readonly symbol: string;
+  readonly #pluralName: string;
+  readonly #singularName: string;
+  readonly #symbol: string;
+
+  get pluralName(): string {
+    return this.#pluralName;
+  }
+
+  get singularName(): string {
+    return this.#singularName;
+  }
+
+  get symbol(): string {
+    return this.#symbol;
+  }
 
   static readonly ALL: Iterable<Suit>;
   static readonly CLUBS: Suit;

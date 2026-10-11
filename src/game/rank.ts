@@ -22,17 +22,41 @@ export class Rank {
     if (!singularName) {
       throw new TypeError('Rank name is required');
     }
-    this.pluralName = toStringNonNull(pluralName) || `${singularName}s`;
-    this.singularName = singularName;
-    this.symbol = toStringNonNull(symbol) || String(rankValues[0]);
-    this.values = rankValues;
+    const firstValueSymbol = String(rankValues[0]);
+    symbol = toStringNonNull(symbol) || firstValueSymbol;
+    this.#hasFace = symbol !== firstValueSymbol;
+    this.#pluralName = toStringNonNull(pluralName) || `${singularName}s`;
+    this.#singularName = singularName;
+    this.#symbol = symbol;
+    this.#values = rankValues;
     freeze(this);
   }
 
-  readonly pluralName: string;
-  readonly singularName: string;
-  readonly symbol: string;
-  readonly values: readonly [number] | readonly [number, number];
+  readonly #hasFace: boolean;
+  readonly #pluralName: string;
+  readonly #singularName: string;
+  readonly #symbol: string;
+  readonly #values: readonly [number] | readonly [number, number];
+
+  get hasFace(): boolean {
+    return this.#hasFace;
+  }
+
+  get pluralName(): string {
+    return this.#pluralName;
+  }
+
+  get singularName(): string {
+    return this.#singularName;
+  }
+
+  get symbol(): string {
+    return this.#symbol;
+  }
+
+  get values(): readonly [number] | readonly [number, number] {
+    return this.#values;
+  }
 
   static readonly ALL: Iterable<Rank>;
   static readonly ACE: Rank;

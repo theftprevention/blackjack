@@ -11,7 +11,9 @@ const DEFAULTS = Object.freeze({
   doubleAfterSplit: true,
   maximumSplitCount: 3,
   seatCount: MAXIMUM_SEAT_COUNT,
-}) satisfies Rules;
+}) satisfies Omit<Rules, never>;
+
+export type RuleKey = (keyof Rules) & (keyof RuleOptions);
 
 export type RuleOptions = {
   [Key in keyof Rules]+?: Rules[Key];
@@ -20,31 +22,59 @@ export type RuleOptions = {
 export class Rules {
   constructor(options?: Partial<Record<keyof RuleOptions, unknown>>) {
     if (options == null) {
-      return Rules.DEFAULT;
+      options = { __proto__: null } as any as Partial<Record<keyof RuleOptions, unknown>>;
     }
-    const rule: <K extends keyof RuleOptions>(
+    const rule: <K extends RuleKey>(
       key: K,
-      converter: (value: unknown) => RuleOptions[K]
-    ) => void = (key, convert) => {
-      (this as RuleOptions)[key] = key in options ? convert(options[key]) : Rules.DEFAULT[key];
+      converter: (value: unknown) => Rules[K]
+    ) => Rules[K] = (key, convert) => {
+      return key in options ? convert(options[key]) : Rules.DEFAULT[key];
     };
-    rule('allowSurrender', Boolean);
-    rule('blackjackPayoutFactor', toBlackjackPayoutFactor);
-    rule('dealerHitsOnSoft17', Boolean);
-    rule('deckCount', toDeckCount);
-    rule('doubleAfterSplit', Boolean);
-    rule('maximumSplitCount', toMaximumSplitCount);
-    rule('seatCount', toSeatCount);
+    this.#allowSurrender = rule('allowSurrender', Boolean);
+    this.#blackjackPayoutFactor = rule('blackjackPayoutFactor', toBlackjackPayoutFactor);
+    this.#dealerHitsOnSoft17 = rule('dealerHitsOnSoft17', Boolean);
+    this.#deckCount = rule('deckCount', toDeckCount);
+    this.#doubleAfterSplit = rule('doubleAfterSplit', Boolean);
+    this.#maximumSplitCount = rule('maximumSplitCount', toMaximumSplitCount);
+    this.#seatCount = rule('seatCount', toSeatCount);
     Object.freeze(this);
   }
 
-  declare readonly allowSurrender: boolean;
-  declare readonly blackjackPayoutFactor: number;
-  declare readonly dealerHitsOnSoft17: boolean;
-  declare readonly deckCount: number;
-  declare readonly doubleAfterSplit: boolean;
-  declare readonly maximumSplitCount: number;
-  declare readonly seatCount: number;
+  readonly #allowSurrender: boolean;
+  readonly #blackjackPayoutFactor: number;
+  readonly #dealerHitsOnSoft17: boolean;
+  readonly #deckCount: number;
+  readonly #doubleAfterSplit: boolean;
+  readonly #maximumSplitCount: number;
+  readonly #seatCount: number;
+
+  get allowSurrender(): boolean {
+    return this.#allowSurrender;
+  }
+
+  get blackjackPayoutFactor(): number {
+    return this.#blackjackPayoutFactor;
+  }
+
+  get dealerHitsOnSoft17(): boolean {
+    return this.#dealerHitsOnSoft17;
+  }
+
+  get deckCount(): number {
+    return this.#deckCount;
+  }
+
+  get doubleAfterSplit(): boolean {
+    return this.#doubleAfterSplit;
+  }
+
+  get maximumSplitCount(): number {
+    return this.#maximumSplitCount;
+  }
+
+  get seatCount(): number {
+    return this.#seatCount;
+  }
 
   static readonly DEFAULT: Rules;
 
