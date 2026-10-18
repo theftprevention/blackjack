@@ -3,7 +3,7 @@
     viewBox="0 0 635 889"
     xmlns="http://www.w3.org/2000/svg"
     width="635"
-    :class="['card', rank.name, suit.pluralName]"
+    :class="`${rank.name} of ${suit.pluralName} card`"
   >
     <rect
       x="0"
