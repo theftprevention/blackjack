@@ -19,6 +19,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --gap: 16px;
 }
 
 body {
@@ -38,9 +40,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   max-height: 100%;
   padding: 32px;
-  gap: 16px;
+  gap: var(--gap);
 }
 
 svg {
@@ -48,4 +51,5 @@ svg {
   height: auto;
   max-width: 100%;
   max-height: 100%;
+  flex-basis: calc((100% - (var(--gap) * 3)) / 4);
 }

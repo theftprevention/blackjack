@@ -12,21 +12,21 @@ import {
 
 export class Rank {
   constructor(
-    singularName: string,
+    name: string,
     values: number | readonly number[],
     symbol?: string,
     pluralName?: string
   ) {
     const rankValues = toRankValues(values);
-    singularName = toStringNonNull(singularName);
-    if (!singularName) {
+    name = toStringNonNull(name);
+    if (!name) {
       throw new TypeError('Rank name is required');
     }
     const firstValueSymbol = String(rankValues[0]);
     symbol = toStringNonNull(symbol) || firstValueSymbol;
     this.#hasFace = symbol !== firstValueSymbol;
-    this.#pluralName = toStringNonNull(pluralName) || `${singularName}s`;
-    this.#singularName = singularName;
+    this.#pluralName = toStringNonNull(pluralName) || `${name}s`;
+    this.#name = name;
     this.#symbol = symbol;
     this.#values = rankValues;
     freeze(this);
@@ -34,7 +34,7 @@ export class Rank {
 
   readonly #hasFace: boolean;
   readonly #pluralName: string;
-  readonly #singularName: string;
+  readonly #name: string;
   readonly #symbol: string;
   readonly #values: readonly [number] | readonly [number, number];
 
@@ -46,8 +46,8 @@ export class Rank {
     return this.#pluralName;
   }
 
-  get singularName(): string {
-    return this.#singularName;
+  get name(): string {
+    return this.#name;
   }
 
   get symbol(): string {
@@ -113,7 +113,7 @@ export class Rank {
       },
     };
     for (const rank of ranks) {
-      descriptors[rank.singularName.toUpperCase()] = {
+      descriptors[rank.name.toUpperCase()] = {
         configurable: false,
         enumerable: false,
         value: rank,

@@ -1,5 +1,5 @@
 <template>
-  <CardTemplate :rank="Rank.FOUR" :suit="suit" v-slot="{ slug, symbol }">
+  <g>
     <g :id="`${slug}-top`">
       <text x="30%" y="25%" font-size="200" text-anchor="middle" dominant-baseline="middle">
         {{ symbol }}
@@ -9,18 +9,12 @@
       </text>
     </g>
     <use :href="`#${slug}-top`" style="transform-origin: 50% 50%; transform: rotate(180deg);" />
-  </CardTemplate>
+  </g>
 </template>
 
 <script setup lang="ts">
-import { Rank } from '../../game/rank';
-import { Suit } from '../../game/suit';
-import CardTemplate from './CardTemplate.vue';
+import { cardFaceProps, useCardFace } from './useCardFace';
 
-defineProps({
-  suit: {
-    type: Suit,
-    required: true,
-  },
-});
+const props = defineProps(cardFaceProps);
+const { rank, symbol } = useCardFace(props);
 </script>

@@ -6,31 +6,31 @@ import {
 } from '../common/utils';
 
 export class Suit {
-  constructor (singularName: string, symbol: string, pluralName?: string) {
-    singularName = toStringNonNull(singularName);
-    if (!singularName) {
+  constructor (name: string, symbol: string, pluralName?: string) {
+    name = toStringNonNull(name);
+    if (!name) {
       throw new TypeError('Suit name is required');
     }
     symbol = toStringNonNull(symbol);
     if (!symbol) {
       throw new TypeError('Suit symbol is required');
     }
-    this.#pluralName = toStringNonNull(pluralName) || `${singularName}s`;
-    this.#singularName = singularName;
+    this.#pluralName = toStringNonNull(pluralName) || `${name}s`;
+    this.#name = name;
     this.#symbol = symbol;
     freeze(this);
   }
 
   readonly #pluralName: string;
-  readonly #singularName: string;
+  readonly #name: string;
   readonly #symbol: string;
 
   get pluralName(): string {
     return this.#pluralName;
   }
 
-  get singularName(): string {
-    return this.#singularName;
+  get name(): string {
+    return this.#name;
   }
 
   get symbol(): string {

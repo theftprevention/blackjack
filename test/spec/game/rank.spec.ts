@@ -5,7 +5,7 @@ describe('Rank', () => {
   it('has the correct properties', () => {
     const rank = new Rank('test', 42, 'T', 'tests');
     expect(rank).toHaveProperty('pluralName', 'tests');
-    expect(rank).toHaveProperty('singularName', 'test');
+    expect(rank).toHaveProperty('name', 'test');
     expect(rank).toHaveProperty('symbol', 'T');
     expect(rank).toHaveProperty('values', [42]);
   });
@@ -13,7 +13,7 @@ describe('Rank', () => {
   it('is read-only', () => {
     const rank = new Rank('test', 42, 'T', 'tests') as Record<keyof Rank, unknown>;
     expect(() => { rank.pluralName = 'tests'; }).toThrow();
-    expect(() => { rank.singularName = 'test'; }).toThrow();
+    expect(() => { rank.name = 'test'; }).toThrow();
     expect(() => { rank.symbol = 'T'; }).toThrow();
     expect(() => { rank.values = [42]; }).toThrow();
     expect(() => { (rank.values as unknown[]).push(42); }).toThrow();
@@ -44,7 +44,7 @@ describe('Rank.TWO', () => {
   it('has the correct properties', () => {
     expect(Rank.TWO).toMatchObject({
       pluralName: 'twos',
-      singularName: 'two',
+      name: 'two',
       symbol: '2',
       values: [2],
     });
@@ -63,7 +63,7 @@ describe('Rank.THREE', () => {
   it('has the correct properties', () => {
     expect(Rank.THREE).toMatchObject({
       pluralName: 'threes',
-      singularName: 'three',
+      name: 'three',
       symbol: '3',
       values: [3],
     });
@@ -82,7 +82,7 @@ describe('Rank.FOUR', () => {
   it('has the correct properties', () => {
     expect(Rank.FOUR).toMatchObject({
       pluralName: 'fours',
-      singularName: 'four',
+      name: 'four',
       symbol: '4',
       values: [4],
     });
@@ -101,7 +101,7 @@ describe('Rank.FIVE', () => {
   it('has the correct properties', () => {
     expect(Rank.FIVE).toMatchObject({
       pluralName: 'fives',
-      singularName: 'five',
+      name: 'five',
       symbol: '5',
       values: [5],
     });
@@ -120,7 +120,7 @@ describe('Rank.SIX', () => {
   it('has the correct properties', () => {
     expect(Rank.SIX).toMatchObject({
       pluralName: 'sixes',
-      singularName: 'six',
+      name: 'six',
       symbol: '6',
       values: [6],
     });
@@ -139,7 +139,7 @@ describe('Rank.SEVEN', () => {
   it('has the correct properties', () => {
     expect(Rank.SEVEN).toMatchObject({
       pluralName: 'sevens',
-      singularName: 'seven',
+      name: 'seven',
       symbol: '7',
       values: [7],
     });
@@ -158,7 +158,7 @@ describe('Rank.EIGHT', () => {
   it('has the correct properties', () => {
     expect(Rank.EIGHT).toMatchObject({
       pluralName: 'eights',
-      singularName: 'eight',
+      name: 'eight',
       symbol: '8',
       values: [8],
     });
@@ -177,7 +177,7 @@ describe('Rank.NINE', () => {
   it('has the correct properties', () => {
     expect(Rank.NINE).toMatchObject({
       pluralName: 'nines',
-      singularName: 'nine',
+      name: 'nine',
       symbol: '9',
       values: [9],
     });
@@ -196,7 +196,7 @@ describe('Rank.TEN', () => {
   it('has the correct properties', () => {
     expect(Rank.TEN).toMatchObject({
       pluralName: 'tens',
-      singularName: 'ten',
+      name: 'ten',
       symbol: '10',
       values: [10],
     });
@@ -215,7 +215,7 @@ describe('Rank.JACK', () => {
   it('has the correct properties', () => {
     expect(Rank.JACK).toMatchObject({
       pluralName: 'jacks',
-      singularName: 'jack',
+      name: 'jack',
       symbol: 'J',
       values: [10],
     });
@@ -234,7 +234,7 @@ describe('Rank.QUEEN', () => {
   it('has the correct properties', () => {
     expect(Rank.QUEEN).toMatchObject({
       pluralName: 'queens',
-      singularName: 'queen',
+      name: 'queen',
       symbol: 'Q',
       values: [10],
     });
@@ -253,7 +253,7 @@ describe('Rank.KING', () => {
   it('has the correct properties', () => {
     expect(Rank.KING).toMatchObject({
       pluralName: 'kings',
-      singularName: 'king',
+      name: 'king',
       symbol: 'K',
       values: [10],
     });
@@ -272,7 +272,7 @@ describe('Rank.ACE', () => {
   it('has the correct properties', () => {
     expect(Rank.ACE).toMatchObject({
       pluralName: 'aces',
-      singularName: 'ace',
+      name: 'ace',
       symbol: 'A',
       values: [1, 11],
     });

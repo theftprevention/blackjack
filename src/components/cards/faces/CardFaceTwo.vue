@@ -1,0 +1,17 @@
+<template>
+  <g>
+    <g :id="`${slug}-top`">
+      <text x="50%" y="25%" font-size="240" text-anchor="middle" dominant-baseline="middle">
+        {{ symbol }}
+      </text>
+    </g>
+    <use :href="`#${slug}-top`" style="transform-origin: 50% 50%; transform: rotate(180deg);" />
+  </g>
+</template>
+
+<script setup lang="ts">
+import { cardFaceProps, useCardFace } from './useCardFace';
+
+const props = defineProps(cardFaceProps);
+const { rank, symbol } = useCardFace(props);
+</script>

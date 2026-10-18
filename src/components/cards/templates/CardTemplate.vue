@@ -3,7 +3,7 @@
     viewBox="0 0 635 889"
     xmlns="http://www.w3.org/2000/svg"
     width="635"
-    :class="['card', rank.singularName, suit.pluralName]"
+    :class="['card', rank.name, suit.pluralName]"
   >
     <rect
       x="0"
@@ -34,15 +34,18 @@
 
       <use :href="`#${topLeftId}`" style="transform-origin: 50% 50%; transform: rotate(180deg);" />
 
-      <slot v-bind="{ slug, symbol: suit.symbol }" />
+      <component :is="faceComponent" :rank="rank" :slug="slug" :suit="suit" />
     </g>
   </svg>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Rank } from '../../game/rank';
-import { Suit } from '../../game/suit';
+import { Rank } from '../../../game/rank';
+import { Suit } from '../../../game/suit';
+import CardFaceTwo from '../faces/CardFaceTwo.vue';
+import CardFaceThree from '../faces/CardFaceThree.vue';
+import CardFaceFour from '../faces/CardFaceFour.vue';
 
 const props = defineProps({
   rank: {
@@ -55,8 +58,21 @@ const props = defineProps({
   },
 });
 
-const slug = computed(() => `${props.rank.singularName}-of-${props.suit.pluralName}`);
+const slug = computed(() => `${props.rank.name}-of-${props.suit.pluralName}`);
 const topLeftId = computed(() => `${slug.value}-topleft`);
+
+const faceComponent = computed(() => {
+  switch (props.rank.name) {
+    case 'two':
+      return CardFaceTwo;
+    case 'three':
+      return CardFaceThree;
+    case 'four':
+      return CardFaceFour;
+    default:
+      return 'div';
+  }
+});
 </script>
 
 <style>

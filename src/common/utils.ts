@@ -132,6 +132,13 @@ export const bindCall = bind(functionPrototypeBind, functionPrototypeCall) as {
   ): T;
 };
 
+export function capitalize<T extends string>(value: T): Capitalize<T>;
+export function capitalize(value: string): string {
+  return value.length > 1
+    ? `${value[0].toUpperCase()}${value.slice(1)}`
+    : value;
+}
+
 export function getOwnOrInheritedPropertyDescriptor<Target extends object, Key extends PropertyKey>(
   target: Target,
   key: Key

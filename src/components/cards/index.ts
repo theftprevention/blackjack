@@ -1,0 +1,130 @@
+import type { Component } from 'vue';
+
+import { defineComponent, h } from 'vue';
+import { capitalize } from '../../common';
+import { Rank, Suit } from '../../game';
+import CardTemplate from './templates/CardTemplate.vue';
+
+type CardComponentName = `${'Two' | 'Three' | 'Four' | 'Five' | 'Six' | 'Seven' | 'Eight' | 'Nine' | 'Ten' | 'Jack' | 'Queen' | 'King' | 'Ace'}Of${'Club' | 'Diamond' | 'Heart' | 'Spade'}s`;
+
+const cardComponents = { __proto__: null } as { __proto__: null } & { [N in CardComponentName]: Component };
+for (const rank of Rank.ALL) {
+  for (const suit of Suit.ALL) {
+    const componentName = `${capitalize(rank.name)}Of${capitalize(suit.pluralName)}` as CardComponentName;
+    cardComponents[componentName] = defineComponent({
+      setup() {
+        return () => h(CardTemplate, { rank, suit });
+      },
+    });
+  }
+}
+
+const {
+  AceOfClubs,
+  AceOfDiamonds,
+  AceOfHearts,
+  AceOfSpades,
+  EightOfClubs,
+  EightOfDiamonds,
+  EightOfHearts,
+  EightOfSpades,
+  FiveOfClubs,
+  FiveOfDiamonds,
+  FiveOfHearts,
+  FiveOfSpades,
+  FourOfClubs,
+  FourOfDiamonds,
+  FourOfHearts,
+  FourOfSpades,
+  JackOfClubs,
+  JackOfDiamonds,
+  JackOfHearts,
+  JackOfSpades,
+  KingOfClubs,
+  KingOfDiamonds,
+  KingOfHearts,
+  KingOfSpades,
+  NineOfClubs,
+  NineOfDiamonds,
+  NineOfHearts,
+  NineOfSpades,
+  QueenOfClubs,
+  QueenOfDiamonds,
+  QueenOfHearts,
+  QueenOfSpades,
+  SevenOfClubs,
+  SevenOfDiamonds,
+  SevenOfHearts,
+  SevenOfSpades,
+  SixOfClubs,
+  SixOfDiamonds,
+  SixOfHearts,
+  SixOfSpades,
+  TenOfClubs,
+  TenOfDiamonds,
+  TenOfHearts,
+  TenOfSpades,
+  ThreeOfClubs,
+  ThreeOfDiamonds,
+  ThreeOfHearts,
+  ThreeOfSpades,
+  TwoOfClubs,
+  TwoOfDiamonds,
+  TwoOfHearts,
+  TwoOfSpades,
+} = cardComponents;
+
+export {
+  AceOfClubs,
+  AceOfDiamonds,
+  AceOfHearts,
+  AceOfSpades,
+  EightOfClubs,
+  EightOfDiamonds,
+  EightOfHearts,
+  EightOfSpades,
+  FiveOfClubs,
+  FiveOfDiamonds,
+  FiveOfHearts,
+  FiveOfSpades,
+  FourOfClubs,
+  FourOfDiamonds,
+  FourOfHearts,
+  FourOfSpades,
+  JackOfClubs,
+  JackOfDiamonds,
+  JackOfHearts,
+  JackOfSpades,
+  KingOfClubs,
+  KingOfDiamonds,
+  KingOfHearts,
+  KingOfSpades,
+  NineOfClubs,
+  NineOfDiamonds,
+  NineOfHearts,
+  NineOfSpades,
+  QueenOfClubs,
+  QueenOfDiamonds,
+  QueenOfHearts,
+  QueenOfSpades,
+  SevenOfClubs,
+  SevenOfDiamonds,
+  SevenOfHearts,
+  SevenOfSpades,
+  SixOfClubs,
+  SixOfDiamonds,
+  SixOfHearts,
+  SixOfSpades,
+  TenOfClubs,
+  TenOfDiamonds,
+  TenOfHearts,
+  TenOfSpades,
+  ThreeOfClubs,
+  ThreeOfDiamonds,
+  ThreeOfHearts,
+  ThreeOfSpades,
+  TwoOfClubs,
+  TwoOfDiamonds,
+  TwoOfHearts,
+  TwoOfSpades,
+};

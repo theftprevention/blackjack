@@ -5,7 +5,7 @@ describe('Suit', () => {
   it('has the correct properties', () => {
     const suit = new Suit('test', 'T');
     expect(suit).toHaveProperty('pluralName', 'tests');
-    expect(suit).toHaveProperty('singularName', 'test');
+    expect(suit).toHaveProperty('name', 'test');
     expect(suit).toHaveProperty('symbol', 'T');
   });
 
@@ -13,7 +13,7 @@ describe('Suit', () => {
     const suit = new Suit('test', 'T') as Record<keyof Suit, unknown>;
     expect(() => { suit.pluralName = 'tests'; }).toThrow();
     expect(() => { suit.symbol = 'T'; }).toThrow();
-    expect(() => { suit.singularName = 'test'; }).toThrow();
+    expect(() => { suit.name = 'test'; }).toThrow();
   });
 
   describe('constructor', () => {
@@ -41,7 +41,7 @@ describe('Suit.CLUBS', () => {
   it('has the correct properties', () => {
     expect(Suit.CLUBS).toMatchObject({
       pluralName: 'clubs',
-      singularName: 'club',
+      name: 'club',
       symbol: '\u2663',
     });
   });
@@ -59,7 +59,7 @@ describe('Suit.DIAMONDS', () => {
   it('has the correct properties', () => {
     expect(Suit.DIAMONDS).toMatchObject({
       pluralName: 'diamonds',
-      singularName: 'diamond',
+      name: 'diamond',
       symbol: '\u2666',
     });
   });
@@ -77,7 +77,7 @@ describe('Suit.HEARTS', () => {
   it('has the correct properties', () => {
     expect(Suit.HEARTS).toMatchObject({
       pluralName: 'hearts',
-      singularName: 'heart',
+      name: 'heart',
       symbol: '\u2665',
     });
   });
@@ -95,7 +95,7 @@ describe('Suit.SPADES', () => {
   it('has the correct properties', () => {
     expect(Suit.SPADES).toMatchObject({
       pluralName: 'spades',
-      singularName: 'spade',
+      name: 'spade',
       symbol: '\u2660',
     });
   });

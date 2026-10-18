@@ -23,7 +23,7 @@ export class Card {
   }
 
   get name(): string {
-    return `${this.rank.singularName} of ${this.suit.pluralName}`;
+    return `${this.rank.name} of ${this.suit.pluralName}`;
   }
 
   get rank(): Rank {
