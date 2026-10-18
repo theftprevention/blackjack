@@ -13,5 +13,5 @@
 import { cardFaceProps, useCardFace } from './useCardFace';
 
 const props = defineProps(cardFaceProps);
-const { rank, symbol } = useCardFace(props);
+const { slug, symbol } = useCardFace(props);
 </script>

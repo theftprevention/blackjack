@@ -23,6 +23,7 @@ export function useCardFace(props: ExtractPropTypes<typeof cardFaceProps>) {
   const suit = toRef(props, 'suit');
   return {
     rank,
+    slug: computed(() => `${rank.value.name}-of-${suit.value.pluralName}`),
     suit,
     symbol: computed(() => suit.value.symbol),
   };
